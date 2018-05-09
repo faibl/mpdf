@@ -809,6 +809,9 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 	var $outerblocktags;
 	var $innerblocktags;
 
+	var $hyphenateInWebAddresses;
+	var $hyphenateBeforeNumeral;
+
 	/**
 	 * @var string
 	 */
@@ -7878,8 +7881,18 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 							$checkw = $addc . $checkw;
 						}
 						// Don't break if HyphenMinus AND (a URL or before a numeral or before a >)
-						if ((!preg_match('/(http:|ftp:|https:|www\.)/', $checkw) && $checkchar != '>' && !preg_match('/[0-9]/', $checkchar)) || $prevchar == "\xe2\x80\x90") {
-							$breakfound = [$cutcontentctr, $cutcharctr, $cutcontentctr, $cutcharctr, 'cut'];
+						if (
+							(
+								(!$this->hyphenateInWebAddresses && !preg_match('/(http:|ftp:|https:|www\.)/', $checkw))
+								&&
+								(!$this->hyphenateBeforeNumeral && !preg_match('/[0-9]/', $checkchar))
+								&&
+								$checkchar != '>'
+                            )
+							||
+							$prevchar == "\xe2\x80\x90"
+                        ) {
+						$breakfound = [$cutcontentctr, $cutcharctr, $cutcontentctr, $cutcharctr, 'cut'];
 						}
 					} /////////////////////
 					// 6) Break at Soft HYPHEN (replace with hard hyphen)
