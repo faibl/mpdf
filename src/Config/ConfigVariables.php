@@ -354,7 +354,7 @@ class ConfigVariables
 			'allowCJKoverflow' => false,
 			// Forces overflowng punctuation to hang outside right margin mPDF 5.6.40
 			'CJKforceend' => false,
-			// Hyphenate in special cases
+			// Wordsplitting in special cases
 			'splitWebAddresses' => false,
 			'splitBeforeNumeral' => false,
 
