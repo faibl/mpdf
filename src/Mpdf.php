@@ -809,8 +809,8 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 	var $outerblocktags;
 	var $innerblocktags;
 
-	var $hyphenateInWebAddresses;
-	var $hyphenateBeforeNumeral;
+	var $splitWebAddresses;
+	var $splitBeforeNumeral;
 
 	/**
 	 * @var string
@@ -7883,9 +7883,9 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 						// Don't break if HyphenMinus AND (a URL or before a numeral or before a >)
 						if (
 							(
-								(!$this->hyphenateInWebAddresses && !preg_match('/(http:|ftp:|https:|www\.)/', $checkw))
+								($this->splitWebAddresses || !preg_match('/(http:|ftp:|https:|www\.)/', $checkw))
 								&&
-								(!$this->hyphenateBeforeNumeral && !preg_match('/[0-9]/', $checkchar))
+								($this->splitBeforeNumeral || !preg_match('/[0-9]/', $checkchar))
 								&&
 								$checkchar != '>'
                             )
