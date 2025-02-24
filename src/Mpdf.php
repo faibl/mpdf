@@ -8133,9 +8133,9 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 						}
 						// Don't break if HyphenMinus AND (a URL or before a numeral or before a >)
                         // faibl:HK: enable hyphenation in URLs before hyphen minus
-						//if ((!preg_match('/(http:|ftp:|https:|www\.)/', $checkw) && $checkchar != '>' && !preg_match('/[0-9]/', $checkchar)) || $prevchar == "\xe2\x80\x90") {
+						// if ((!preg_match('/(http:|ftp:|https:|www\.)/', $checkw) && $checkchar != '>' && !preg_match('/[0-9]/', $checkchar)) || $prevchar == "\xe2\x80\x90") {
 							$breakfound = [$cutcontentctr, $cutcharctr, $cutcontentctr, $cutcharctr, 'cut'];
-						//}
+						// }
 					} /////////////////////
 					// 6) Break at Soft HYPHEN (replace with hard hyphen)
 					/////////////////////
