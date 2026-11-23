@@ -117,4 +117,33 @@ class HyphenatorTest extends \Yoast\PHPUnitPolyfills\TestCases\TestCase
 		return $word;
 	}
 
+	/**
+	 * @dataProvider minimumWordLengthProvider
+	 *
+	 * @param string $lang
+	 * @param string $input
+	 * @param int $ptr
+	 * @param int $output
+	 */
+	public function testMinimumWordLengthDoesNotLimitPatternLength($lang, $input, $ptr, $output)
+	{
+		$this->mpdf->SHYlang = $lang;
+		$this->mpdf->SHYcharmin = 5;
+
+		$this->assertSame($output, $this->hyphenator->hyphenateWord($input, $ptr));
+	}
+
+	public function minimumWordLengthProvider()
+	{
+		return [
+			// same hyphenation points as with the default SHYcharmin
+			['en', 'animation', 5, 5],
+			['en', 'hyphenation', 4, 2],
+			['en', 'disestablishmentarianism', 50, 21],
+			// words shorter than SHYcharmin are not hyphenated
+			['de', 'eine', 3, -1],
+			['de', 'etwa', 3, -1],
+		];
+	}
+
 }

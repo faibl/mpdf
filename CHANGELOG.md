@@ -21,6 +21,7 @@ Bugfixes
 * Fixed `backupSIPFont` not being used for Plane 2 characters while the font cache is empty (#2236)
 * Fixed hyphenation ignoring the highest value when several patterns match the same position (#2242)
 * Fixed hyphenation patterns containing multibyte characters being applied at wrong positions (#2242)
+* Fixed `SHYcharmin` also limiting the length of hyphenation patterns, so a higher minimum word length dropped most patterns
 
 mPDF 8.2.x
 ===========================
